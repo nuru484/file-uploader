@@ -3,6 +3,7 @@ const passport = require('passport');
 const ejs = require('ejs');
 const path = require('path');
 const http = require('http');
+require('dotenv').config();
 const expressSession = require('express-session');
 const { PrismaSessionStore } = require('@quixo3/prisma-session-store');
 const { PrismaClient } = require('@prisma/client');
