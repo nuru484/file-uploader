@@ -10,6 +10,7 @@ const { PrismaClient } = require('@prisma/client');
 const initializePassport = require('./src/config/passport-config');
 
 const loginRouter = require('./src/routes/login-routes');
+const signUpRouter = require('./src/routes/sign-up-routes');
 
 const app = express();
 
@@ -41,6 +42,7 @@ app.use(passport.session());
 initializePassport(passport);
 
 app.use('/', loginRouter);
+app.use('/sign-up', signUpRouter);
 
 const port = process.env.PORT || 3000;
 
