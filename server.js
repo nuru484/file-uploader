@@ -2,16 +2,19 @@ const express = require('express');
 const passport = require('passport');
 const ejs = require('ejs');
 const path = require('path');
-const http = require('http');
 require('dotenv').config();
 const expressSession = require('express-session');
 const { PrismaSessionStore } = require('@quixo3/prisma-session-store');
 const { PrismaClient } = require('@prisma/client');
 
+const initializePassport = require('./src/config/passport-config');
+
+const loginRouter = require('./src/routes/login-routes');
+
 const app = express();
 
 app.set('view engine', 'ejs');
-app.set('views', path.join(__dirname, 'views'));
+app.set('views', path.join(__dirname, 'src', 'views'));
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -33,9 +36,11 @@ app.use(
   })
 );
 
-app.get('/', (req, res) => {
-  res.send('Hello File Uploader');
-});
+app.use(passport.initialize());
+app.use(passport.session());
+initializePassport(passport);
+
+app.use('/', loginRouter);
 
 const port = process.env.PORT || 3000;
 
