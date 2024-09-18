@@ -12,6 +12,7 @@ const initializePassport = require('./src/config/passport-config');
 const loginRouter = require('./src/routes/login-routes');
 const signUpRouter = require('./src/routes/sign-up-routes');
 const dashboardRouter = require('./src/routes/dashboard-routes');
+const folderRouter = require('./src/routes/folder-routes');
 
 const app = express();
 
@@ -45,6 +46,7 @@ initializePassport(passport);
 app.use('/', loginRouter);
 app.use('/sign-up', signUpRouter);
 app.use('/dashboard', dashboardRouter);
+app.use('/create-folder', folderRouter);
 
 const port = process.env.PORT || 3000;
 
