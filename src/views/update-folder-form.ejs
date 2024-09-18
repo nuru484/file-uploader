@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Create Folder Form</title>
+  </head>
+  <body>
+    <div class="form-container">
+      <div>
+        <p>Update <%=folder.name %></p>
+
+        <button onclick="removeFolderContent()">Cancel</button>
+      </div>
+      <form action="/folder/update-folder/:id" method="POST">
+        <input type="hidden" name="id" value="<%= folder.id %>" required />
+        <input type="text" name="name" value="<%= folder.name %>" required />
+        <button type="submit">Create Folder</button>
+      </form>
+    </div>
+  </body>
+</html>

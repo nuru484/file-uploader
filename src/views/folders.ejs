@@ -9,6 +9,7 @@
     <% folders.forEach(folder => { %>
     <ul>
       <li><%-folder.name %></li>
+      <a href="/folder/update-folder/<%=folder.id %>">Update Folder</a>
     </ul>
 
     <% }) %>
