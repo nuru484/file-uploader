@@ -122,13 +122,32 @@ const deleteFileGet = async (req, res) => {
   try {
     const id = parseInt(req.params.id, 10);
 
-    const file = await prisma.file.delete({
+    const file = await prisma.file.findUnique({
       where: {
         id: id,
       },
     });
 
-    res.redirect('/dashboard');
+    if (!file) {
+      return res.status(404).send('File not found to be deleted');
+    }
+
+    await prisma.file.delete({
+      where: {
+        id: id,
+      },
+    });
+
+    const filePath = file.path;
+
+    fs.unlink(filePath, (err) => {
+      if (err) {
+        console.error('Error deleting file from disk:', err);
+        return res.status(500).send('Error deleting file from disk');
+      }
+
+      res.redirect('/dashboard');
+    });
   } catch (error) {
     console.error('Error deleting file', error);
     res.status(500).send('Internal Server Error');
