@@ -28,13 +28,7 @@
       </div>
     </aside>
     <main>
-      <ul>
-        <li>File</li>
-        <li>Folder</li>
-        <li>File</li>
-        <li>Folder</li>
-        <li>File</li>
-      </ul>
+      <div id="folders"></div>
     </main>
 
     <script>
@@ -50,7 +44,7 @@
 
       async function loadFolderContent() {
         try {
-          const response = await fetch('/create-folder');
+          const response = await fetch('/folder');
           const html = await response.text();
           document.getElementById('folder-content').innerHTML = html;
         } catch (error) {
@@ -62,6 +56,17 @@
       function removeFolderContent() {
         document.getElementById('folder-content').innerHTML = '';
       }
+
+      (async function displayFolders() {
+        try {
+          const response = await fetch('/folder/display-folders');
+          const html = await response.text();
+          document.getElementById('folders').innerHTML = html;
+        } catch (error) {
+          console.error('Error displaying folders', error);
+          res.status(500).send('Internal Server Error');
+        }
+      })();
     </script>
   </body>
 </html>

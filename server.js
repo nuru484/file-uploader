@@ -46,7 +46,7 @@ initializePassport(passport);
 app.use('/', loginRouter);
 app.use('/sign-up', signUpRouter);
 app.use('/dashboard', dashboardRouter);
-app.use('/create-folder', folderRouter);
+app.use('/folder', folderRouter);
 
 const port = process.env.PORT || 3000;
 

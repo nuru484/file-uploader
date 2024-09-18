@@ -26,11 +26,21 @@ const createFolderPost = async (req, res) => {
       },
     });
 
-    res.redirect('/');
+    res.redirect('/dashboard');
   } catch (error) {
     console.error('Error creating folder', error);
     res.status(500).send('Internal Server Error');
   }
 };
 
-module.exports = { createFolderGet, createFolderPost };
+const displayFoldersGet = async (req, res) => {
+  try {
+    const folders = await prisma.folder.findMany();
+    res.render('folders', { folders });
+  } catch (error) {
+    console.error('Error displaying folders', error);
+    res.status(500).send('Internal Server Error');
+  }
+};
+
+module.exports = { createFolderGet, createFolderPost, displayFoldersGet };
