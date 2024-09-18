@@ -3,11 +3,6 @@ const path = require('path');
 const fs = require('fs');
 const { PrismaClient } = require('@prisma/client');
 const prisma = new PrismaClient();
-const express = require('express');
-const app = express();
-
-// Middleware to serve static files from 'public/' directory
-app.use(express.static(path.join(__dirname, 'public')));
 
 // GET route to render the file upload form
 const createFileGet = async (req, res) => {
@@ -123,22 +118,22 @@ const updateFilePost = async (req, res) => {
   }
 };
 
-// const deleteFolderGet = async (req, res) => {
-//   try {
-//     const id = parseInt(req.params.id, 10);
+const deleteFileGet = async (req, res) => {
+  try {
+    const id = parseInt(req.params.id, 10);
 
-//     const folder = await prisma.folder.delete({
-//       where: {
-//         id: id,
-//       },
-//     });
+    const file = await prisma.file.delete({
+      where: {
+        id: id,
+      },
+    });
 
-//     res.redirect('/dashboard');
-//   } catch (error) {
-//     console.error('Error updating folder', error);
-//     res.status(500).send('Internal Server Error');
-//   }
-// };
+    res.redirect('/dashboard');
+  } catch (error) {
+    console.error('Error deleting file', error);
+    res.status(500).send('Internal Server Error');
+  }
+};
 
 module.exports = {
   createFileGet,
@@ -146,4 +141,5 @@ module.exports = {
   displayFilesGet,
   updateFileGet,
   updateFilePost,
+  deleteFileGet,
 };

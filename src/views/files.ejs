@@ -9,7 +9,10 @@
     <% files.forEach(file => { %>
     <ul>
       <li><%-file.name %></li>
-      <a href="/file/update-file/<%=file.id %>">Update <%=file.name %></a>
+      <button onclick="loadFileContentUpdate(<%= file.id %>)">
+        Update File
+      </button>
+      <a href="/file/delete-file/<%=file.id %>">Delete File</a>
     </ul>
 
     <% }) %>

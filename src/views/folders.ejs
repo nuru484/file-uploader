@@ -6,13 +6,18 @@
     <title>Document</title>
   </head>
   <body>
-    <% folders.forEach(folder => { %>
     <ul>
-      <li><%-folder.name %></li>
-      <a href="/folder/update-folder/<%=folder.id %>">Update Folder</a>
-      <a href="/folder/delete-folder/<%=folder.id %>">Delete Folder</a>
-    </ul>
+      <% folders.forEach(folder => { %>
+      <li>
+        <%- folder.name %>
 
-    <% }) %>
+        <button onclick="loadFolderContentUpdate(<%= folder.id %>)">
+          Update Folder
+        </button>
+
+        <a href="/folder/delete-folder/<%= folder.id %>">Delete Folder</a>
+      </li>
+      <% }) %>
+    </ul>
   </body>
 </html>

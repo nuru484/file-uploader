@@ -86,7 +86,7 @@ const deleteFolderGet = async (req, res) => {
 
     res.redirect('/dashboard');
   } catch (error) {
-    console.error('Error updating folder', error);
+    console.error('Error deleting folder', error);
     res.status(500).send('Internal Server Error');
   }
 };

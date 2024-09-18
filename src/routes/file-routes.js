@@ -15,7 +15,7 @@ fileRouter.get('/display-files', controllers.displayFilesGet);
 fileRouter.get('/update-file/:id', controllers.updateFileGet);
 fileRouter.post('/update-file/:id', controllers.updateFilePost);
 
-// // Delete Folders
-// folderRouter.get('/delete-folder/:id', controllers.deleteFolderGet);
+// Delete files
+fileRouter.get('/delete-file/:id', controllers.deleteFileGet);
 
 module.exports = fileRouter;

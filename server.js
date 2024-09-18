@@ -22,7 +22,8 @@ app.set('views', path.join(__dirname, 'src', 'views'));
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-app.use(express.static(path.join(__dirname, 'public')));
+const publicDir = path.join(__dirname, 'src/public');
+app.use(express.static(publicDir));
 
 app.use(
   expressSession({
