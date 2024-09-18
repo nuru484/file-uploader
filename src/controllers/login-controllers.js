@@ -23,6 +23,7 @@ const loginPagePost = async (req, res, next) => {
         if (err) {
           return next(err);
         }
+        req.session.userId = user.id;
         return res.redirect('/dashboard');
       });
     })(req, res, next);
@@ -32,4 +33,18 @@ const loginPagePost = async (req, res, next) => {
   }
 };
 
-module.exports = { loginPageGet, loginPagePost };
+const logoutGet = async (req, res, next) => {
+  req.logout((err) => {
+    if (err) {
+      return next(err);
+    }
+    req.session.destroy((err) => {
+      if (err) {
+        return next(err);
+      }
+      res.redirect('/');
+    });
+  });
+};
+
+module.exports = { loginPageGet, loginPagePost, logoutGet };

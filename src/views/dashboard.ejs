@@ -12,11 +12,21 @@
       <div class="logo-container"><span>Logo</span></div>
       <div class="account">
         <div class="username">
-          <span>Image</span>
-          <p>Name</p>
+          <span
+            ><img
+              src="<%=user.profile  %>"
+              alt="user profile photo"
+              width="60px"
+          /></span>
+          <p><%=user.username %></p>
         </div>
-        <div class="manage-account">Another html</div>
-        <div class="signout"><span>icon</span><span>sign out</span></div>
+        <div class="manage-account">
+          <span>icon</span>
+          <p>Manage Account</p>
+        </div>
+        <div class="signout">
+          <span>icon</span><a href="/logout">Sign Out</a>
+        </div>
       </div>
     </header>
 

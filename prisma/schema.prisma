@@ -25,6 +25,7 @@ model User {
   username String @unique
   password String
   email    String @unique
+  profile  String @default("/default-profile.jpg")
 }
 
 model Folder {
