@@ -4,17 +4,16 @@ const fs = require('fs');
 const { PrismaClient } = require('@prisma/client');
 const prisma = new PrismaClient();
 
-// GET route to render the file upload form
+// GET route to render file upload form
 const createFileGet = async (req, res) => {
   try {
-    res.render('file-upload-form'); // Ensure this view exists
+    res.render('file-upload-form');
   } catch (error) {
     console.error('Error rendering file upload form', error);
     res.status(500).send('Internal Server Error');
   }
 };
 
-// keep files in the public directory
 const publicDir = path.join(__dirname, '../public');
 
 if (!fs.existsSync(publicDir)) {
@@ -43,7 +42,6 @@ const upload = multer({
 const createFilePost = async (req, res) => {
   upload(req, res, async function (err) {
     if (err) {
-      // Handle multer errors
       return res.status(400).send('File upload failed: ' + err.message);
     }
 
@@ -52,14 +50,15 @@ const createFilePost = async (req, res) => {
     }
 
     const { originalname, size, path } = req.file;
+    const folderId = parseInt(req.body.folderId, 10);
 
     try {
-      // Save file details to the database using Prisma
       const file = await prisma.file.create({
         data: {
           name: originalname,
           size: size,
           path: path,
+          folderId: isNaN(folderId) ? null : folderId,
         },
       });
 
@@ -70,6 +69,7 @@ const createFilePost = async (req, res) => {
     }
   });
 };
+
 const displayFilesGet = async (req, res) => {
   try {
     const files = await prisma.file.findMany();

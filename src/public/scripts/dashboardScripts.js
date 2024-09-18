@@ -1,17 +1,17 @@
-async function loadFolderContent() {
+async function loadFolderForm() {
   try {
     const response = await fetch('/folder');
     const html = await response.text();
-    document.getElementById('folder-content').innerHTML = html;
+    document.getElementById('folder-form').innerHTML = html;
   } catch (error) {
-    console.error('Error loading folder content:', error);
-    document.getElementById('folder-content').innerHTML =
-      'Error loading folder content';
+    console.error('Error loading folder form:', error);
+    document.getElementById('folder-form').innerHTML =
+      'Error loading folder form';
   }
 }
 
-function removeFolderContent() {
-  document.getElementById('folder-content').innerHTML = '';
+function removeFolderForm() {
+  document.getElementById('folder-form').innerHTML = '';
 }
 
 (async function displayFolders() {
@@ -25,20 +25,39 @@ function removeFolderContent() {
   }
 })();
 
-async function loadFileContent() {
+async function loadFileForm() {
   try {
     const response = await fetch('/file');
     const html = await response.text();
-    document.getElementById('file-content').innerHTML = html;
+    document.getElementById('file-form').innerHTML = html;
+
+    function getFolderIdFromMainContainer() {
+      const mainContainer = document.getElementById('main-container');
+      if (!mainContainer) {
+        console.error('Main container not found');
+        return null;
+      }
+
+      const folderElement = mainContainer.querySelector('[data-folderId]');
+      return folderElement ? folderElement.getAttribute('data-folderId') : null;
+    }
+
+    const folderId = getFolderIdFromMainContainer();
+
+    if (folderId) {
+      console.log(folderId);
+      document.getElementById('folderId').value = folderId;
+    } else {
+      console.error('Folder ID not found or main container is missing');
+    }
   } catch (error) {
-    console.error('Error loading file content:', error);
-    document.getElementById('file-content').innerHTML =
-      'Error loading file content';
+    console.error('Error loading file form:', error);
+    document.getElementById('file-form').innerHTML = 'Error loading file form';
   }
 }
 
-function removeFileContent() {
-  document.getElementById('file-content').innerHTML = '';
+function removeFileForm() {
+  document.getElementById('file-form').innerHTML = '';
 }
 
 (async function displayFiles() {
@@ -52,7 +71,7 @@ function removeFileContent() {
   }
 })();
 
-async function loadFolderContentUpdate(id) {
+async function loadFolderFormUpdate(id) {
   try {
     const response = await fetch(`/folder/update-folder/${id}`);
 
@@ -62,15 +81,15 @@ async function loadFolderContentUpdate(id) {
 
     const html = await response.text();
 
-    document.getElementById('folder-content').innerHTML = html;
+    document.getElementById('folder-form').innerHTML = html;
   } catch (error) {
-    console.error('Error loading folder content:', error);
-    document.getElementById('folder-content').innerHTML =
-      'Error loading folder content';
+    console.error('Error loading folder form:', error);
+    document.getElementById('folder-form').innerHTML =
+      'Error loading folder form';
   }
 }
 
-async function loadFileContentUpdate(id) {
+async function loadFileFormUpdate(id) {
   try {
     const response = await fetch(`/file/update-file/${id}`);
 
@@ -80,10 +99,28 @@ async function loadFileContentUpdate(id) {
 
     const html = await response.text();
 
-    document.getElementById('file-content').innerHTML = html;
+    document.getElementById('file-form').innerHTML = html;
   } catch (error) {
-    console.error('Error loading file content:', error);
-    document.getElementById('file-content').innerHTML =
-      'Error loading folder content';
+    console.error('Error loading file form:', error);
+    document.getElementById('file-form').innerHTML =
+      'Error loading folder form';
+  }
+}
+
+async function loadFolderContents(id) {
+  try {
+    const response = await fetch(`/folder/folder-contents/${id}`);
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    }
+
+    const html = await response.text();
+
+    document.getElementById('main-container').innerHTML = html;
+  } catch (error) {
+    console.error('Error loading folder contents:', error);
+    document.getElementById('main-container').innerHTML =
+      'Error loading folder contents';
   }
 }

@@ -37,6 +37,26 @@ const displayFoldersGet = async (req, res) => {
   }
 };
 
+const folderContentsGet = async (req, res) => {
+  try {
+    const id = parseInt(req.params.id, 10);
+
+    const folder = await prisma.folder.findUnique({
+      where: {
+        id: id,
+      },
+      include: {
+        Files: true,
+      },
+    });
+
+    res.render('folder-contents', { folder });
+  } catch (error) {
+    console.error('Error displaying folder contents', error);
+    res.status(500).send('Internal Server Error');
+  }
+};
+
 const updateFolderGet = async (req, res) => {
   try {
     const id = parseInt(req.params.id, 10);
@@ -95,6 +115,7 @@ module.exports = {
   createFolderGet,
   createFolderPost,
   displayFoldersGet,
+  folderContentsGet,
   updateFolderGet,
   updateFolderPost,
   deleteFolderGet,

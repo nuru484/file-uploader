@@ -9,13 +9,22 @@
     <div class="form-container">
       <div>
         <p>Upload File To Drive</p>
-
-        <button onclick="removeFileContent()">Cancel</button>
+        <button onclick="removeFileForm()">Cancel</button>
       </div>
-      <form action="/file" method="POST" enctype="multipart/form-data">
+      <form
+        id="uploadForm"
+        action="/file"
+        method="POST"
+        enctype="multipart/form-data"
+      >
         <input type="file" name="file-input" id="fileInput" required />
+        <input type="hidden" id="folderId" name="folderId" />
         <button type="submit">Upload File</button>
       </form>
     </div>
+    <script
+      type="text/javascript"
+      src="scripts/file-upload-form-scripts.js"
+    ></script>
   </body>
 </html>

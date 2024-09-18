@@ -9,13 +9,17 @@
     <ul>
       <% folders.forEach(folder => { %>
       <li>
-        <%- folder.name %>
+        <div class="folder">
+          <p onclick="loadFolderContents(<%= folder.id %>)">
+            <%- folder.name %>
+          </p>
 
-        <button onclick="loadFolderContentUpdate(<%= folder.id %>)">
-          Update Folder
-        </button>
+          <button onclick="loadFolderFormUpdate(<%= folder.id %>)">
+            Update Folder
+          </button>
 
-        <a href="/folder/delete-folder/<%= folder.id %>">Delete Folder</a>
+          <a href="/folder/delete-folder/<%= folder.id %>">Delete Folder</a>
+        </div>
       </li>
       <% }) %>
     </ul>

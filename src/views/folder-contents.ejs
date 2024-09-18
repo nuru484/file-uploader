@@ -3,15 +3,19 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>Folder Contents</title>
   </head>
   <body>
-    <% files.forEach(file => { %> <% if (file.folderId === null) { %>
-    <ul>
+    <h1>Files in <%= folder.name %></h1>
+
+    <ul data-folderId="<%= folder.id %>">
+      <% if (folder.Files.length > 0) { %> <% folder.Files.forEach(file => { %>
       <li><%- file.name %></li>
       <button onclick="loadFileFormUpdate(<%= file.id %>)">Update File</button>
       <a href="/file/delete-file/<%= file.id %>">Delete File</a>
+      <% }) %> <% } else { %>
+      <li>No files in this folder.</li>
+      <% } %>
     </ul>
-    <% } %> <% }); %>
   </body>
 </html>

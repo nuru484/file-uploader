@@ -19,19 +19,22 @@
         <div class="signout"><span>icon</span><span>sign out</span></div>
       </div>
     </header>
-    <aside>
-      <div class="add-folder">
-        <button onclick="loadFolderContent()">Add Folder</button>
-        <div id="folder-content"></div>
-      </div>
-      <div class="add-file">
-        <button onclick="loadFileContent()">Add File</button>
-        <div id="file-content"></div>
-      </div>
-    </aside>
+
     <main>
-      <div id="folders"></div>
-      <div id="files"></div>
+      <div class="controls">
+        <div class="add-folder">
+          <button onclick="loadFolderForm()">Add Folder</button>
+          <div id="folder-form"></div>
+        </div>
+        <div class="add-file">
+          <button onclick="loadFileForm()">Add File</button>
+          <div id="file-form"></div>
+        </div>
+      </div>
+      <div id="main-container">
+        <div id="folders"></div>
+        <div id="files"></div>
+      </div>
     </main>
 
     <script type="text/javascript" src="scripts/dashboardScripts.js"></script>

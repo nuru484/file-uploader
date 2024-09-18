@@ -10,6 +10,7 @@ folderRouter.post('/', controllers.createFolderPost);
 
 // Read folders
 folderRouter.get('/display-folders', controllers.displayFoldersGet);
+folderRouter.get('/folder-contents/:id', controllers.folderContentsGet);
 
 // Update Folders
 folderRouter.get('/update-folder/:id', controllers.updateFolderGet);
