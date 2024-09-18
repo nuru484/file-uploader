@@ -12,8 +12,8 @@
 
         <button onclick="removeFileContent()">Cancel</button>
       </div>
-      <form action="">
-        <input type="file" name="file-input" required />
+      <form action="/file" method="POST" enctype="multipart/form-data">
+        <input type="file" name="file-input" id="fileInput" required />
         <button type="submit">Upload File</button>
       </form>
     </div>

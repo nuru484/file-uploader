@@ -23,7 +23,7 @@
         <div id="folder-content"></div>
       </div>
       <div class="add-file">
-        <button onclick="showFileContent()">Add File</button>
+        <button onclick="loadFileContent()">Add File</button>
         <div id="file-content"></div>
       </div>
     </aside>
@@ -32,10 +32,15 @@
     </main>
 
     <script>
-      function showFileContent() {
-        document.getElementById(
-          'file-content'
-        ).innerHTML = `<%- include('partials/file-upload-form.ejs') %>`;
+      async function loadFileContent() {
+        try {
+          const response = await fetch('/file');
+          const html = await response.text();
+          document.getElementById('file-content').innerHTML = html;
+        } catch (error) {
+          console.error('Error loading file content:', error);
+          res.status(500).send('Internal Server Error');
+        }
       }
 
       function removeFileContent() {

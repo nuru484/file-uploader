@@ -13,6 +13,7 @@ const loginRouter = require('./src/routes/login-routes');
 const signUpRouter = require('./src/routes/sign-up-routes');
 const dashboardRouter = require('./src/routes/dashboard-routes');
 const folderRouter = require('./src/routes/folder-routes');
+const fileRouter = require('./src/routes/file-routes');
 
 const app = express();
 
@@ -47,6 +48,7 @@ app.use('/', loginRouter);
 app.use('/sign-up', signUpRouter);
 app.use('/dashboard', dashboardRouter);
 app.use('/folder', folderRouter);
+app.use('/file', fileRouter);
 
 const port = process.env.PORT || 3000;
 

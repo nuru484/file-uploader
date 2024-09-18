@@ -41,7 +41,7 @@ model File {
   size       Int
   uploadTime DateTime     @default(now())
   folder     Folder?      @relation(fields: [folderId], references: [id], onDelete: Cascade)
-  folderId   Int
+  folderId   Int?
   path       String
   SharedFile SharedFile[]
 }
