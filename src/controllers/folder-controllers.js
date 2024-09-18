@@ -2,12 +2,6 @@ const { PrismaClient } = require('@prisma/client');
 const prisma = new PrismaClient();
 const { body, validationResult } = require('express-validator');
 
-// Create a folder
-// Display a folder
-// Update folder name
-// Delete a folder
-// Share a folder
-
 const createFolderGet = async (req, res) => {
   try {
     res.render('create-folder-form');
@@ -35,9 +29,7 @@ const createFolderPost = async (req, res) => {
 const displayFoldersGet = async (req, res) => {
   try {
     const folders = await prisma.folder.findMany();
-    if (!folders) {
-      return res.status(404).send('Folders not found');
-    }
+
     res.render('folders', { folders });
   } catch (error) {
     console.error('Error displaying folders', error);
@@ -53,10 +45,6 @@ const updateFolderGet = async (req, res) => {
         id: id,
       },
     });
-
-    if (!folder) {
-      return res.status(404).send('Folder not found');
-    }
 
     res.render('update-folder-form', { folder });
   } catch (error) {

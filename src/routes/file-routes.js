@@ -8,8 +8,8 @@ const controllers = require('../controllers/file-controller');
 fileRouter.get('/', controllers.createFileGet);
 fileRouter.post('/', controllers.createFilePost);
 
-// // Read folders
-// folderRouter.get('/display-folders', controllers.displayFoldersGet);
+// Read files
+fileRouter.get('/display-files', controllers.displayFilesGet);
 
 // // Update Folders
 // folderRouter.get('/update-folder/:id', controllers.updateFolderGet);

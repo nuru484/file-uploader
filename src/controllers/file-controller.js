@@ -75,18 +75,16 @@ const createFilePost = async (req, res) => {
     }
   });
 };
-// const displayFoldersGet = async (req, res) => {
-//   try {
-//     const folders = await prisma.folder.findMany();
-//     if (!folders) {
-//       return res.status(404).send('Folders not found');
-//     }
-//     res.render('folders', { folders });
-//   } catch (error) {
-//     console.error('Error displaying folders', error);
-//     res.status(500).send('Internal Server Error');
-//   }
-// };
+const displayFilesGet = async (req, res) => {
+  try {
+    const files = await prisma.file.findMany();
+
+    res.render('files', { files });
+  } catch (error) {
+    console.error('Error displaying files', error);
+    res.status(500).send('Internal Server Error');
+  }
+};
 
 // const updateFolderGet = async (req, res) => {
 //   try {
@@ -149,4 +147,5 @@ const createFilePost = async (req, res) => {
 module.exports = {
   createFileGet,
   createFilePost,
+  displayFilesGet,
 };

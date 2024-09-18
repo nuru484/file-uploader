@@ -29,6 +29,7 @@
     </aside>
     <main>
       <div id="folders"></div>
+      <div id="files"></div>
     </main>
 
     <script>
@@ -69,6 +70,17 @@
           document.getElementById('folders').innerHTML = html;
         } catch (error) {
           console.error('Error displaying folders', error);
+          res.status(500).send('Internal Server Error');
+        }
+      })();
+
+      (async function displayFiles() {
+        try {
+          const response = await fetch('/file/display-files');
+          const html = await response.text();
+          document.getElementById('files').innerHTML = html;
+        } catch (error) {
+          console.error('Error displaying files', error);
           res.status(500).send('Internal Server Error');
         }
       })();
