@@ -4,14 +4,14 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <link rel="stylesheet" type="text/css" href="/styles/index.css" />
+    <link rel="stylesheet" type="text/css" href="styles/dashboard-styles.css" />
     <title>Document</title>
   </head>
   <body>
     <header>
       <div class="logo-container"><span>Logo</span></div>
-      <div class="account">
-        <div class="username">
+      <div class="profile-container">
+        <div class="username-icon">
           <span
             ><img
               src="<%=user.profile  %>"
@@ -20,13 +20,7 @@
           /></span>
           <p><%=user.username %></p>
         </div>
-        <div class="manage-account">
-          <span>icon</span>
-          <p>Manage Account</p>
-        </div>
-        <div class="signout">
-          <span>icon</span><a href="/logout">Sign Out</a>
-        </div>
+        <div class="profile-detail"><%- include("partials/profile.ejs") %></div>
       </div>
     </header>
 

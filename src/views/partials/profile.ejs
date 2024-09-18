@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="styles/profile-styles.css" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="account">
+      <div class="user-profile">
+        <span
+          ><img src="<%=user.profile  %>" alt="user profile photo" width="60px"
+        /></span>
+        <p><%=user.username %></p>
+      </div>
+      <div class="manage-account-container">
+        <div class="manage-account"><span>icon</span>Manage Acccount</div>
+      </div>
+      <div class="signout"><span>icon</span><a href="/logout">Sign Out</a></div>
+    </div>
+  </body>
+</html>

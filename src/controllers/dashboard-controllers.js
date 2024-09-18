@@ -11,7 +11,6 @@ const dashboardGet = async (req, res) => {
       where: { id: req.session.userId },
     });
 
-    console.log(user);
     if (user) {
       res.render('dashboard', { title: 'Dashboard', user });
     } else {

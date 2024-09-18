@@ -124,3 +124,32 @@ async function loadFolderContents(id) {
       'Error loading folder contents';
   }
 }
+
+const usernameIcon = document.querySelector('.username-icon');
+const accountDetails = document.querySelector('.profile-detail');
+
+function toggleAccountDetails() {
+  if (accountDetails.style.display === 'block') {
+    accountDetails.style.display = 'none';
+    usernameIcon.style.display = 'block';
+  } else {
+    accountDetails.style.display = 'block';
+    usernameIcon.style.display = 'none';
+  }
+}
+
+function handleClickOutside(event) {
+  if (
+    !accountDetails.contains(event.target) &&
+    !usernameIcon.contains(event.target)
+  ) {
+    accountDetails.style.display = 'none';
+    usernameIcon.style.display = 'block';
+  }
+}
+
+usernameIcon.addEventListener('click', function () {
+  toggleAccountDetails();
+});
+
+document.addEventListener('click', handleClickOutside);
