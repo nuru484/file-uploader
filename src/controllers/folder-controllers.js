@@ -86,10 +86,28 @@ const updateFolderPost = async (req, res) => {
   }
 };
 
+const deleteFolderGet = async (req, res) => {
+  try {
+    const id = parseInt(req.params.id, 10);
+
+    const folder = await prisma.folder.delete({
+      where: {
+        id: id,
+      },
+    });
+
+    res.redirect('/dashboard');
+  } catch (error) {
+    console.error('Error updating folder', error);
+    res.status(500).send('Internal Server Error');
+  }
+};
+
 module.exports = {
   createFolderGet,
   createFolderPost,
   displayFoldersGet,
   updateFolderGet,
   updateFolderPost,
+  deleteFolderGet,
 };

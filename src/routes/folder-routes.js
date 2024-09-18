@@ -15,4 +15,7 @@ folderRouter.get('/display-folders', controllers.displayFoldersGet);
 folderRouter.get('/update-folder/:id', controllers.updateFolderGet);
 folderRouter.post('/update-folder/:id', controllers.updateFolderPost);
 
+// Delete Folders
+folderRouter.get('/delete-folder/:id', controllers.deleteFolderGet);
+
 module.exports = folderRouter;
