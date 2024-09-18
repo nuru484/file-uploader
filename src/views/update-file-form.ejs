@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>File Upload Form</title>
+  </head>
+  <body>
+    <div class="form-container">
+      <div>
+        <p>Update File To Drive</p>
+
+        <button onclick="removeFileContent()">Cancel</button>
+      </div>
+      <form action="/file/update-file/:id" method="POST">
+        <input type="hidden" name="id" value="<%= file.id %>" required />
+
+        <input
+          type="text"
+          name="name"
+          id="fileInput"
+          value="<%= file.name %>"
+          required
+        />
+        <button type="submit">Upload File</button>
+      </form>
+    </div>
+  </body>
+</html>

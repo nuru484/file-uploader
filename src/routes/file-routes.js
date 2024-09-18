@@ -11,9 +11,9 @@ fileRouter.post('/', controllers.createFilePost);
 // Read files
 fileRouter.get('/display-files', controllers.displayFilesGet);
 
-// // Update Folders
-// folderRouter.get('/update-folder/:id', controllers.updateFolderGet);
-// folderRouter.post('/update-folder/:id', controllers.updateFolderPost);
+// Update files
+fileRouter.get('/update-file/:id', controllers.updateFileGet);
+fileRouter.post('/update-file/:id', controllers.updateFilePost);
 
 // // Delete Folders
 // folderRouter.get('/delete-folder/:id', controllers.deleteFolderGet);

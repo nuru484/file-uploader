@@ -86,46 +86,42 @@ const displayFilesGet = async (req, res) => {
   }
 };
 
-// const updateFolderGet = async (req, res) => {
-//   try {
-//     const id = parseInt(req.params.id, 10);
-//     const folder = await prisma.folder.findUnique({
-//       where: {
-//         id: id,
-//       },
-//     });
+const updateFileGet = async (req, res) => {
+  try {
+    const id = parseInt(req.params.id, 10);
+    const file = await prisma.file.findUnique({
+      where: {
+        id: id,
+      },
+    });
 
-//     if (!folder) {
-//       return res.status(404).send('Folder not found');
-//     }
+    res.render('update-file-form', { file });
+  } catch (error) {
+    console.error('Error updating folder', error);
+    res.status(500).send('Internal Server Error');
+  }
+};
 
-//     res.render('update-folder-form', { folder });
-//   } catch (error) {
-//     console.error('Error updating folder', error);
-//     res.status(500).send('Internal Server Error');
-//   }
-// };
+const updateFilePost = async (req, res) => {
+  try {
+    const id = parseInt(req.body.id, 10);
+    const { name } = req.body;
 
-// const updateFolderPost = async (req, res) => {
-//   try {
-//     const id = parseInt(req.body.id, 10);
-//     const { name } = req.body;
+    const updateFile = await prisma.file.update({
+      where: {
+        id: id,
+      },
+      data: {
+        name: name,
+      },
+    });
 
-//     const updateFolder = await prisma.folder.update({
-//       where: {
-//         id: id,
-//       },
-//       data: {
-//         name: name,
-//       },
-//     });
-
-//     res.redirect('/dashboard');
-//   } catch (error) {
-//     console.error('Error updating folder', error);
-//     res.status(500).send('Internal Server Error');
-//   }
-// };
+    res.redirect('/dashboard');
+  } catch (error) {
+    console.error('Error updating file', error);
+    res.status(500).send('Internal Server Error');
+  }
+};
 
 // const deleteFolderGet = async (req, res) => {
 //   try {
@@ -148,4 +144,6 @@ module.exports = {
   createFileGet,
   createFilePost,
   displayFilesGet,
+  updateFileGet,
+  updateFilePost,
 };
