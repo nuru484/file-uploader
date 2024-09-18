@@ -3,14 +3,19 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="styles/files-styles.css" />
     <title>Document</title>
   </head>
   <body>
     <% files.forEach(file => { %> <% if (file.folderId === null) { %>
     <ul>
-      <li><%- file.name %></li>
-      <button onclick="loadFileFormUpdate(<%= file.id %>)">Update File</button>
-      <a href="/file/delete-file/<%= file.id %>">Delete File</a>
+      <div class="file">
+        <li><%- file.name %></li>
+        <button onclick="loadFileFormUpdate(<%= file.id %>)">
+          Update File
+        </button>
+        <a href="/file/delete-file/<%= file.id %>">Delete File</a>
+      </div>
     </ul>
     <% } %> <% }); %>
   </body>

@@ -3,8 +3,8 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
     <link rel="stylesheet" type="text/css" href="styles/dashboard-styles.css" />
+    <link href="/styles/tailwind.css" rel="stylesheet" />
     <title>Document</title>
   </head>
   <body>
@@ -26,13 +26,19 @@
 
     <main>
       <div class="controls">
-        <div class="add-folder">
-          <button onclick="loadFolderForm()">Add Folder</button>
-          <div id="folder-form"></div>
+        <div>
+          <span>icon</span>
+          <p>My Drive</p>
         </div>
-        <div class="add-file">
-          <button onclick="loadFileForm()">Add File</button>
-          <div id="file-form"></div>
+        <div class="add-btns">
+          <div class="add-folder">
+            <button onclick="loadFolderForm()">Add Folder</button>
+            <div id="folder-form"></div>
+          </div>
+          <div class="add-file">
+            <button onclick="loadFileForm()">Add File</button>
+            <div id="file-form"></div>
+          </div>
         </div>
       </div>
       <div id="main-container">
