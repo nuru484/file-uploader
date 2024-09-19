@@ -4,24 +4,95 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>File Upload Form</title>
+    <script src="https://cdn.tailwindcss.com"></script>
   </head>
-  <body>
-    <div class="form-container">
-      <div>
-        <p>Upload File To Drive</p>
-        <button onclick="removeFileForm()">Cancel</button>
+  <body class="bg-gray-100">
+    <div
+      class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-10"
+    >
+      <div class="w-6/12 max-w-lg bg-white rounded-lg shadow-md p-6">
+        <!-- Modal header -->
+        <div class="flex items-center justify-between border-b pb-4 mb-3">
+          <h3 class="text-lg font-semibold text-gray-900">
+            Upload File To <span id="upload-parent">Drive</span>
+          </h3>
+          <button
+            class="w-8 h-8 flex items-center justify-center bg-transparent hover:bg-gray-200 text-gray-400 rounded-lg"
+            onclick="removeFileForm()"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="2"
+              stroke="currentColor"
+              class="w-4 h-4"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M6 18L18 6M6 6l12 12"
+              />
+            </svg>
+          </button>
+        </div>
+
+        <!-- Modal body -->
+        <form
+          id="uploadForm"
+          action="/file"
+          method="POST"
+          enctype="multipart/form-data"
+          class="space-y-4"
+        >
+          <!-- File input -->
+          <div class="flex flex-col items-center space-y-2">
+            <input
+              type="file"
+              name="file-input"
+              id="fileInput"
+              class="hidden"
+              required
+            />
+            <label
+              for="fileInput"
+              class="flex flex-col items-center justify-center w-full px-4 py-2 bg-gray-100 border border-gray-300 rounded-lg cursor-pointer hover:bg-gray-200 transition"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="1.5"
+                stroke="currentColor"
+                class="w-6 h-6 mb-2 text-gray-700"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M7.5 9L12 4.5m0 0L16.5 9M12 4.5V15"
+                />
+              </svg>
+              <span class="text-gray-700 text-sm">Choose a file</span>
+              <span class="italic text-xs text-gray-500">(Max size: 10MB)</span>
+            </label>
+          </div>
+
+          <!-- Hidden input -->
+          <input type="hidden" id="folderId" name="folderId" />
+
+          <!-- Submit button -->
+          <div class="flex justify-end">
+            <button
+              type="submit"
+              class="bg-blue-600 text-white font-medium rounded-lg px-5 py-2.5 hover:bg-blue-700 transition focus:outline-none focus:ring-4 focus:ring-blue-300"
+            >
+              Upload File
+            </button>
+          </div>
+        </form>
       </div>
-      <form
-        id="uploadForm"
-        action="/file"
-        method="POST"
-        enctype="multipart/form-data"
-      >
-        <input type="file" name="file-input" id="fileInput" required />
-        <input type="hidden" id="folderId" name="folderId" />
-        <button type="submit">Upload File</button>
-      </form>
     </div>
+
     <script
       type="text/javascript"
       src="scripts/file-upload-form-scripts.js"

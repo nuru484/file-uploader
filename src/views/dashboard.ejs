@@ -7,7 +7,9 @@
     <title>My Drive</title>
   </head>
   <body>
-    <header class="bg-slate-200 px-8 py-3 flex justify-between items-center">
+    <header
+      class="relative min-h-28 bg-slate-200 px-8 flex justify-between items-center"
+    >
       <div class="flex justify-center items-center gap-1.5 cursor-pointer">
         <span>
           <img class="w-8" src="logo.png" alt="site logo" />
@@ -19,22 +21,21 @@
         <div
           class="username-icon flex justify-center items-center flex-col cursor-pointer"
         >
-          <span class=""
-            ><img
-              src="<%=user.profile  %>"
-              alt="user profile photo"
-              class="w-10 rounded-full shadow-black shadow"
-          /></span>
+          <img
+            src="user.png"
+            alt="user profile photo"
+            class="w-11 p-2 shadow-black shadow rounded"
+          />
           <p class="text-stone-950">Profile</p>
         </div>
-        <div class="profile-detail hidden">
-          <%- include("partials/profile.ejs") %>
-        </div>
+      </div>
+      <div class="profile-detail hidden">
+        <%- include("partials/profile.ejs") %>
       </div>
     </header>
 
     <main>
-      <div class="controls flex justify-between items-center px-8 py-3">
+      <div class="controls flex justify-between items-center px-10 py-6">
         <div class="flex justify-normal items-center gap-2">
           <span
             ><img class="w-8" src="folder.png" alt="image of a folder"

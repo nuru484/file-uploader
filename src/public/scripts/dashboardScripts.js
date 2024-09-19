@@ -2,7 +2,9 @@ async function loadFolderForm() {
   try {
     const response = await fetch('/folder');
     const html = await response.text();
-    document.getElementById('folder-form').innerHTML = html;
+    const folderForm = document.getElementById('folder-form');
+    folderForm.innerHTML = html;
+    folderForm.classList.remove('hidden');
   } catch (error) {
     console.error('Error loading folder form:', error);
     document.getElementById('folder-form').innerHTML =
@@ -11,7 +13,9 @@ async function loadFolderForm() {
 }
 
 function removeFolderForm() {
-  document.getElementById('folder-form').innerHTML = '';
+  const folderForm = document.getElementById('folder-form');
+  folderForm.innerHTML = '';
+  folderForm.classList.add('hidden');
 }
 
 (async function displayFolders() {
@@ -82,8 +86,9 @@ async function loadFolderFormUpdate(id) {
     const html = await response.text();
 
     document.getElementById('folder-form').innerHTML = html;
+    console.log('helloshioghdigh');
   } catch (error) {
-    console.error('Error loading folder form:', error);
+    console.error('Error loading folder update form:', error);
     document.getElementById('folder-form').innerHTML =
       'Error loading folder form';
   }

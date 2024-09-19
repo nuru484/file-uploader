@@ -3,21 +3,36 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="styles/profile-styles.css" />
     <title>Document</title>
+    <script src="styles/tailwindOut.css"></script>
   </head>
-  <body>
-    <div class="account">
-      <div class="user-profile">
+  <body class="bg-gray-100 text-gray-800">
+    <div
+      class="account fixed cursor-pointer right-5 top-2 bg-white w-80 mx-auto mt-8 p-6 rounded-lg shadow-lg text-center z-10"
+    >
+      <div class="user-profile flex flex-col items-center mb-5">
         <span
-          ><img src="<%=user.profile  %>" alt="user profile photo" width="60px"
+          ><img
+            src="<%= user.profile %>"
+            alt="user profile photo"
+            class="w-16 h-16 rounded-full border-2 border-indigo-600"
         /></span>
-        <p><%=user.username %></p>
+        <p class="mt-3 text-lg font-bold text-gray-800"><%= user.username %></p>
       </div>
-      <div class="manage-account-container">
-        <div class="manage-account"><span>icon</span>Manage Acccount</div>
+      <div class="manage-account-container mb-5">
+        <div
+          class="manage-account bg-indigo-600 text-white flex justify-center items-center py-3 rounded-md cursor-pointer hover:bg-indigo-700 transition duration-300"
+        >
+          Manage Account
+        </div>
       </div>
-      <div class="signout"><span>icon</span><a href="/logout">Sign Out</a></div>
+      <div class="signout text-white flex justify-center items-center">
+        <a
+          href="/logout"
+          class="bg-red-600 text-white w-full py-3 rounded-md cursor-pointer hover:bg-red-700 transition duration-300"
+          >Sign Out</a
+        >
+      </div>
     </div>
   </body>
 </html>
