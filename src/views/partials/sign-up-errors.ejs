@@ -1,7 +1,9 @@
-<% if (locals.errors) {%>
-<ul>
-  <% errors.forEach(function(error) { %>
-  <li><%= error.msg %></li>
-  <% }); %>
-</ul>
+<% if (locals.errors) { %>
+<div class="bg-red-100 border border-red-400 text-red-700 p-4 rounded-lg mb-4">
+  <ul class="list-disc pl-5">
+    <% errors.forEach(function(error) { %>
+    <li><%= error.msg %></li>
+    <% }); %>
+  </ul>
+</div>
 <% } %>
