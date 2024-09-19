@@ -49,13 +49,13 @@ const createFilePost = async (req, res) => {
       return res.status(400).send('No file uploaded');
     }
 
-    const { originalname, size, path } = req.file;
+    const { filename, size, path } = req.file;
     const folderId = parseInt(req.body.folderId, 10);
 
     try {
       const file = await prisma.file.create({
         data: {
-          name: originalname,
+          name: filename,
           size: size,
           path: path,
           folderId: isNaN(folderId) ? null : folderId,

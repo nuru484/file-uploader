@@ -3,45 +3,74 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" type="text/css" href="styles/dashboard-styles.css" />
-    <link href="/styles/tailwind.css" rel="stylesheet" />
-    <title>Document</title>
+    <link href="styles/tailwindOut.css" rel="stylesheet" />
+    <title>My Drive</title>
   </head>
   <body>
-    <header>
-      <div class="logo-container"><span>Logo</span></div>
+    <header class="bg-slate-200 px-8 py-3 flex justify-between items-center">
+      <div class="flex justify-center items-center gap-1.5 cursor-pointer">
+        <span>
+          <img class="w-8" src="logo.png" alt="site logo" />
+        </span>
+        <span class="text-3xl text-blue-600 font-semibold">My Drive</span>
+      </div>
+
       <div class="profile-container">
-        <div class="username-icon">
-          <span
+        <div
+          class="username-icon flex justify-center items-center flex-col cursor-pointer"
+        >
+          <span class=""
             ><img
               src="<%=user.profile  %>"
               alt="user profile photo"
-              width="60px"
+              class="w-10 rounded-full shadow-black shadow"
           /></span>
-          <p><%=user.username %></p>
+          <p class="text-stone-950">Profile</p>
         </div>
-        <div class="profile-detail"><%- include("partials/profile.ejs") %></div>
+        <div class="profile-detail hidden">
+          <%- include("partials/profile.ejs") %>
+        </div>
       </div>
     </header>
 
     <main>
-      <div class="controls">
-        <div>
-          <span>icon</span>
-          <p>My Drive</p>
+      <div class="controls flex justify-between items-center px-8 py-3">
+        <div class="flex justify-normal items-center gap-2">
+          <span
+            ><img class="w-8" src="folder.png" alt="image of a folder"
+          /></span>
+          <p class="text-xl font-semibold">My Drive</p>
         </div>
-        <div class="add-btns">
+        <div class="add-btns flex justify-center items-center gap-6">
           <div class="add-folder">
-            <button onclick="loadFolderForm()">Add Folder</button>
+            <button
+              onclick="loadFolderForm()"
+              class="flex justify-center items-end gap-1"
+            >
+              <img
+                src="new-document.png"
+                alt="photo of a folder"
+                class="w-6"
+              /><span class="text-sm">Add Folder</span>
+            </button>
             <div id="folder-form"></div>
           </div>
           <div class="add-file">
-            <button onclick="loadFileForm()">Add File</button>
+            <button
+              onclick="loadFileForm()"
+              class="flex justify-center items-end gap-1"
+            >
+              <img
+                src="upload.png"
+                class="w-6"
+                alt="photo of upload icon"
+              /><span class="text-sm">Add File</span>
+            </button>
             <div id="file-form"></div>
           </div>
         </div>
       </div>
-      <div id="main-container">
+      <div id="main-container" class="px-8">
         <div id="folders"></div>
         <div id="files"></div>
       </div>
