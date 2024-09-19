@@ -94,6 +94,13 @@ async function loadFolderFormUpdate(id) {
   }
 }
 
+function removeFolderUpdateForm() {
+  const folderForm = document.getElementById('folder-form');
+  folderForm.innerHTML = '';
+  folderForm.classList.add('hidden');
+  window.location.href = '/dashboard';
+}
+
 async function loadFileFormUpdate(id) {
   try {
     const response = await fetch(`/file/update-file/${id}`);
