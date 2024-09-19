@@ -9,18 +9,34 @@
     <ul>
       <% folders.forEach(folder => { %>
       <li>
-        <div class="folder">
-          <p onclick="loadFolderContents(<%= folder.id %>)">
-            <%- folder.name %>
-          </p>
+        <div
+          class="folder px-8 py-4 bg-gray-200 border-b border-gray-800 shadow hover:bg-gray-100 cursor-pointer relative"
+          onclick="loadFolderContents(<%= folder.id %>)"
+        >
+          <div class="flex gap-1">
+            <img src="folder.png" alt="folder photo" class="w-6" />
+            <p class="font-normal"><%- folder.name %></p>
+          </div>
 
-          <button onclick="loadFolderFormUpdate(<%= folder.id %>)">
-            Update Folder
-          </button>
+          <div class="absolute top-4 right-4 flex space-x-2">
+            <button
+              class="px-3 py-1 bg-white rounded hover:bg-slate-100 border shadow shadow-gray-200"
+              onclick="event.stopPropagation(); loadFolderFormUpdate(<%= folder.id %>)"
+            >
+              <img src="pen.png" alt="update icon" class="w-6" />
+            </button>
 
-          <a href="/folder/delete-folder/<%= folder.id %>">Delete Folder</a>
+            <a
+              href="/folder/delete-folder/<%= folder.id %>"
+              class="px-3 py-1 bg-white rounded hover:bg-slate-100 shadow-gray-200"
+              onclick="event.stopPropagation();"
+            >
+              <img src="delete.png" alt="delete icon" class="w-6" />
+            </a>
+          </div>
         </div>
       </li>
+
       <% }) %>
     </ul>
   </body>
