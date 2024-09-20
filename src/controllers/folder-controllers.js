@@ -100,27 +100,6 @@ const updateFolderGet = async (req, res) => {
   }
 };
 
-const updateFolderPost1 = async (req, res) => {
-  try {
-    const id = parseInt(req.body.id, 10);
-    const { name } = req.body;
-
-    const updateFolder = await prisma.folder.update({
-      where: {
-        id: id,
-      },
-      data: {
-        name: name,
-      },
-    });
-
-    res.redirect('/dashboard');
-  } catch (error) {
-    console.error('Error updating folder', error);
-    res.status(500).send('Internal Server Error');
-  }
-};
-
 const updateFolderPost = [
   // validation middleware
   validateFolderName,

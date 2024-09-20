@@ -42,11 +42,23 @@ const upload = multer({
 const createFilePost = async (req, res) => {
   upload(req, res, async function (err) {
     if (err) {
-      return res.status(400).send('File upload failed: ' + err.message);
+      // Check if the error is due to file size limit
+      if (err.code === 'LIMIT_FILE_SIZE') {
+        return res.status(400).render('file-upload-form', {
+          errors: errors.array(),
+        });
+      }
+
+      // Handle other Multer errors
+      return res.status(400).render('file-upload-form', {
+        errors: errors.array(),
+      });
     }
 
     if (!req.file) {
-      return res.status(400).send('No file uploaded');
+      return res.status(400).render('file-upload-form', {
+        errors: errors.array(),
+      });
     }
 
     const { filename, size, path } = req.file;
