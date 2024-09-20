@@ -66,8 +66,6 @@ const validateUser = [
     }),
 ];
 
-module.exports = validateUser;
-
 const signUpPost = [
   // validation middleware
   validateUser,
