@@ -11,6 +11,7 @@
       <h1 class="text-2xl font-bold text-gray-900 mb-6 text-center">
         Welcome to <%= title %>
       </h1>
+      <%- include("partials/form-errors.ejs") %>
       <form action="/" method="POST" class="space-y-6">
         <div>
           <label for="username" class="block text-gray-700 font-medium mb-1">
