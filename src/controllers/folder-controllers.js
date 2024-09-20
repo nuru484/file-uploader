@@ -11,20 +11,48 @@ const createFolderGet = async (req, res) => {
   }
 };
 
-const createFolderPost = async (req, res) => {
-  try {
-    const folder = await prisma.folder.create({
-      data: {
-        name: req.body.name,
-      },
-    });
+// Input validation middleware
+const validateFolderName = [
+  // Username validation
+  body('name')
+    .trim()
+    .escape()
+    .notEmpty()
+    .withMessage('Folder Name is required')
+    .isLength({ max: 30 })
+    .withMessage('Name cannot be longer than 30 characters'),
+];
 
-    res.redirect('/dashboard');
-  } catch (error) {
-    console.error('Error creating folder', error);
-    res.status(500).send('Internal Server Error');
-  }
-};
+// POST login handler
+const createFolderPost = [
+  // validation middleware
+  validateFolderName,
+
+  // main route handler
+  async (req, res, next) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      // If there are validation errors, render them
+      return res.status(400).render('create-folder-form', {
+        title: 'Create Folder',
+        errors: errors.array(),
+      });
+    }
+
+    try {
+      const folder = await prisma.folder.create({
+        data: {
+          name: req.body.name,
+        },
+      });
+
+      res.redirect('/dashboard');
+    } catch (error) {
+      console.error('Error creating folder', error);
+      res.status(500).send('Internal Server Error');
+    }
+  },
+];
 
 const displayFoldersGet = async (req, res) => {
   try {

@@ -14,7 +14,7 @@ const loginPageGet = async (req, res) => {
 // Input validation middleware
 const validateUser = [
   // Username validation
-  body('username')
+  body('name')
     .exists({ checkFalsy: true })
     .withMessage('You must type a username')
     .trim()
