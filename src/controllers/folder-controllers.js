@@ -23,7 +23,6 @@ const validateFolderName = [
     .withMessage('Name cannot be longer than 30 characters'),
 ];
 
-// POST login handler
 const createFolderPost = [
   // validation middleware
   validateFolderName,
@@ -101,7 +100,7 @@ const updateFolderGet = async (req, res) => {
   }
 };
 
-const updateFolderPost = async (req, res) => {
+const updateFolderPost1 = async (req, res) => {
   try {
     const id = parseInt(req.body.id, 10);
     const { name } = req.body;
@@ -121,6 +120,50 @@ const updateFolderPost = async (req, res) => {
     res.status(500).send('Internal Server Error');
   }
 };
+
+const updateFolderPost = [
+  // validation middleware
+  validateFolderName,
+
+  // main route handler
+  async (req, res, next) => {
+    const id = parseInt(req.params.id, 10);
+    const folder = await prisma.folder.findUnique({
+      where: {
+        id: id,
+      },
+    });
+
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      // If there are validation errors, render them
+      return res.status(400).render('update-folder-form', {
+        title: 'Update Folder Name',
+        errors: errors.array(),
+        folder,
+      });
+    }
+
+    try {
+      const id = parseInt(req.body.id, 10);
+      const { name } = req.body;
+
+      const updateFolder = await prisma.folder.update({
+        where: {
+          id: id,
+        },
+        data: {
+          name: name,
+        },
+      });
+
+      res.redirect('/dashboard');
+    } catch (error) {
+      console.error('Error updating folder', error);
+      res.status(500).send('Internal Server Error');
+    }
+  },
+];
 
 const deleteFolderGet = async (req, res) => {
   try {
