@@ -4,7 +4,10 @@
   "main": "index.js",
   "scripts": {
     "dev": "node --watch server",
-    "tailwind:css": "npx tailwindcss -i ./src/public/styles/tailwind.css -o ./src/public/styles/tailwindOut.css --watch"
+    "tailwind:css": "npx tailwindcss -i ./src/public/styles/tailwind.css -o ./src/public/styles/tailwindOut.css --watch",
+    "build": "prisma migrate reset -f",
+    "prisma:generate": "prisma generate",
+    "start": "node server.js"
   },
   "author": "",
   "license": "ISC",
