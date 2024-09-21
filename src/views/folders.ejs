@@ -7,7 +7,7 @@
   </head>
   <body>
     <ul>
-      <% folders.forEach(folder => { %>
+      <% if (folders.length > 0) { %> <% folders.forEach(folder => { %>
       <li>
         <div
           class="folder px-8 py-4 bg-gray-200 border-b border-gray-800 shadow hover:bg-gray-100 cursor-pointer relative"
@@ -36,8 +36,11 @@
           </div>
         </div>
       </li>
-
-      <% }) %>
+      <% }) %> <% } else { %>
+      <li>
+        <p class="text-gray-500">No folders available.</p>
+      </li>
+      <% } %>
     </ul>
   </body>
 </html>

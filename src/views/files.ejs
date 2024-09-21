@@ -8,7 +8,8 @@
   </head>
   <body>
     <ul class="list-none p-0 m-0">
-      <% files.forEach(file => { %> <% if (file.folderId === null) { %>
+      <% if (files.length > 0 && files.some(file => file.folderId === null)) {
+      %> <% files.forEach(file => { %> <% if (file.folderId === null) { %>
       <li class="mb-4">
         <div
           class="file px-8 py-4 bg-gray-200 border-b border-gray-800 shadow hover:bg-gray-100 cursor-pointer relative"
@@ -44,7 +45,11 @@
           </div>
         </div>
       </li>
-      <% } %> <% }); %>
+      <% } %> <% }); %> <% } else { %>
+      <li>
+        <p class="text-gray-500">No files available.</p>
+      </li>
+      <% } %>
     </ul>
   </body>
 </html>
