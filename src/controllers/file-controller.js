@@ -1,8 +1,15 @@
 const multer = require('multer');
-const path = require('path');
-const fs = require('fs');
 const { PrismaClient } = require('@prisma/client');
 const prisma = new PrismaClient();
+const cloudinary = require('cloudinary').v2;
+const { CloudinaryStorage } = require('multer-storage-cloudinary');
+require('dotenv').config();
+
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
+});
 
 // GET route to render file upload form
 const createFileGet = async (req, res) => {
@@ -14,51 +21,31 @@ const createFileGet = async (req, res) => {
   }
 };
 
-const publicDir = path.join(__dirname, '../public');
-
-if (!fs.existsSync(publicDir)) {
-  fs.mkdirSync(publicDir);
-}
-
-//multer storage configuration
-const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, publicDir);
-  },
-  filename: function (req, file, cb) {
-    cb(
-      null,
-      file.fieldname + '-' + Date.now() + path.extname(file.originalname) // Unique file name
-    );
+// Cloudinary storage configuration
+const storage = new CloudinaryStorage({
+  cloudinary: cloudinary,
+  params: {
+    folder: 'uploads',
+    allowed_formats: ['jpg', 'jpeg', 'png', 'pdf', 'gif'],
+    public_id: (req, file) => file.fieldname + '-' + Date.now(),
   },
 });
 
+// Multer upload middleware using Cloudinary storage
 const upload = multer({
   storage: storage,
-  limits: { fileSize: 10 * 1024 * 1024 }, // Limit file size to 10MB
+  limits: { fileSize: 10 * 1024 * 1024 },
 }).single('file-input');
 
 // POST route to handle file upload
 const createFilePost = async (req, res) => {
   upload(req, res, async function (err) {
     if (err) {
-      // Check if the error is due to file size limit
-      if (err.code === 'LIMIT_FILE_SIZE') {
-        return res.status(400).render('file-upload-form', {
-          errors: errors.array(),
-        });
-      }
-
-      // Handle other Multer errors
-      return res.status(400).render('file-upload-form', {
-        errors: errors.array(),
-      });
+      return res.status(400).send('File upload failed: ' + err.message);
     }
 
     if (!req.file) {
-      return res.status(400).render('file-upload-form', {
-        errors: errors.array(),
-      });
+      return res.status(400).send('No file uploaded');
     }
 
     const { filename, size, path } = req.file;
@@ -76,7 +63,7 @@ const createFilePost = async (req, res) => {
 
       res.redirect('/dashboard');
     } catch (error) {
-      console.error('Error creating file entry', error);
+      console.error('Error saving file to the database', error);
       res.status(500).send('Internal Server Error');
     }
   });
@@ -130,38 +117,33 @@ const updateFilePost = async (req, res) => {
   }
 };
 
+// DELETE route to handle file deletion from Cloudinary and database
 const deleteFileGet = async (req, res) => {
   try {
     const id = parseInt(req.params.id, 10);
 
     const file = await prisma.file.findUnique({
-      where: {
-        id: id,
-      },
+      where: { id: id },
     });
 
     if (!file) {
-      return res.status(404).send('File not found to be deleted');
+      return res.status(404).send('File not found');
     }
 
-    await prisma.file.delete({
-      where: {
-        id: id,
-      },
-    });
-
-    const filePath = file.path;
-
-    fs.unlink(filePath, (err) => {
+    cloudinary.uploader.destroy(file.path, async function (err, result) {
       if (err) {
-        console.error('Error deleting file from disk:', err);
-        return res.status(500).send('Error deleting file from disk');
+        console.error('Error deleting file from Cloudinary:', err);
+        return res.status(500).send('Error deleting file from Cloudinary');
       }
+
+      await prisma.file.delete({
+        where: { id: id },
+      });
 
       res.redirect('/dashboard');
     });
   } catch (error) {
-    console.error('Error deleting file', error);
+    console.error('Error deleting file:', error);
     res.status(500).send('Internal Server Error');
   }
 };
