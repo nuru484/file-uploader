@@ -14,7 +14,7 @@ const loginPageGet = async (req, res) => {
 // Input validation middleware
 const validateUser = [
   // Username validation
-  body('name').trim().escape().notEmpty().withMessage('Userame is required'),
+  body('name').trim().escape(),
 
   // Password validation
   body('password')
