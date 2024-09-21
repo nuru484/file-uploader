@@ -54,7 +54,7 @@ const createFilePost = async (req, res) => {
     try {
       const file = await prisma.file.create({
         data: {
-          name: filename,
+          name: req.file.originalname,
           size: size,
           path: path,
           folderId: isNaN(folderId) ? null : folderId,

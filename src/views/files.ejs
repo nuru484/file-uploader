@@ -20,9 +20,9 @@
 
           <div class="absolute top-4 right-4 flex space-x-2">
             <a
-              href="<%= file.name %>"
-              download
+              href="<%= file.path.replace('/upload/', '/upload/fl_attachment/') %>"
               class="px-3 py-1 bg-white rounded hover:bg-slate-100 border shadow shadow-gray-200"
+              download
             >
               <img src="downloads.png" alt="download icon" class="w-6 h-6" />
             </a>
