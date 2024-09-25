@@ -189,3 +189,16 @@ function closeSharedLink() {
 
   // window.location.href = '/dashboard';
 }
+
+const copyShareLink = () => {
+  document
+    .getElementById('copy-share-link')
+    .addEventListener('click', function () {
+      const textarea = document.getElementById('share-link-id');
+      textarea.select();
+      textarea.setSelectionRange(0, 99999); // For mobile devices
+      document.execCommand('copy');
+
+      alert('Text copied to clipboard!');
+    });
+};
