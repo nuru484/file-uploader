@@ -86,7 +86,6 @@ async function loadFolderFormUpdate(id) {
     const html = await response.text();
 
     document.getElementById('folder-form').innerHTML = html;
-    console.log('helloshioghdigh');
   } catch (error) {
     console.error('Error loading folder update form:', error);
     document.getElementById('folder-form').innerHTML =
@@ -165,3 +164,28 @@ usernameIcon.addEventListener('click', function () {
 });
 
 document.addEventListener('click', handleClickOutside);
+
+async function loadShareLink(id) {
+  try {
+    const response = await fetch(`/share-folder/generate/${id}`);
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    }
+
+    const html = await response.text();
+
+    document.getElementById('share-link-container').innerHTML = html;
+  } catch (error) {
+    console.error('Error loading folder link:', error);
+    document.getElementById('share-link-container').innerHTML =
+      'Error loading folder form';
+  }
+}
+
+function closeSharedLink() {
+  const linkContainer = document.getElementById('share-link-container');
+  linkContainer.innerHTML = '';
+
+  // window.location.href = '/dashboard';
+}

@@ -33,12 +33,13 @@
             >
               <img src="delete.png" alt="delete icon" class="w-6" />
             </a>
-            <a
-              href="/share-folder/generate/<%=folder.id  %>"
-              class="px-3 py-1 bg-white rounded hover:bg-slate-100 shadow-gray-200"
-              onclick="event.stopPropagation();"
-              ><img src="share.png" alt="share icon" class="w-6"
-            /></a>
+
+            <button
+              class="px-3 py-1 bg-white rounded hover:bg-slate-100 border shadow shadow-gray-200"
+              onclick="event.stopPropagation(); loadShareLink(<%= folder.id %>) "
+            >
+              <img src="share.png" alt="share icon" class="w-6" />
+            </button>
           </div>
         </div>
       </li>
