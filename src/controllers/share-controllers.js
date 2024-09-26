@@ -18,7 +18,7 @@ const shareFolderGet = async (req, res) => {
   const token = generateToken();
   const expirationTime = Date.now() + 2 * 60000;
   const expirationDate = new Date(expirationTime);
-  const url = `http://localhost:8080/share-folder/${id}/?token=${token}`;
+  const url = `https://file-uploader.koyeb.app/share-folder/${id}/?token=${token}`;
 
   try {
     await prisma.sharedFolder.create({
