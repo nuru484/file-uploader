@@ -186,8 +186,6 @@ async function loadShareLink(id) {
 function closeSharedLink() {
   const linkContainer = document.getElementById('share-link-container');
   linkContainer.innerHTML = '';
-
-  // window.location.href = '/dashboard';
 }
 
 const copyShareLink = () => {
@@ -198,7 +196,5 @@ const copyShareLink = () => {
       textarea.select();
       textarea.setSelectionRange(0, 99999); // For mobile devices
       document.execCommand('copy');
-
-      alert('Text copied to clipboard!');
     });
 };

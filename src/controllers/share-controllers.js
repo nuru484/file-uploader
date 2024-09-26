@@ -89,7 +89,7 @@ const validateSharedLink = async (req, res, next) => {
 const renderSharedFolder = async (req, res) => {
   const { folder } = req;
   console.log(folder);
-  res.render('folder-contents', { folder });
+  res.render('shared-folder', { folder });
 };
 
 module.exports = { shareFolderGet, validateSharedLink, renderSharedFolder };

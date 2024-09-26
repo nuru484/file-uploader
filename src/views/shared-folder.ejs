@@ -3,9 +3,39 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>Folder Contents</title>
+    <!-- Tailwind CSS CDN -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
   </head>
-  <body>
-    <h1>Testing Share Content</h1>
+  <body class="bg-gray-100 p-6">
+    <h1 class="text-3xl font-bold text-gray-800 mb-4"><%= folder.name %></h1>
+    <ul class="space-y-2">
+      <% if (folder.Files && folder.Files.length > 0) { %> <%
+      folder.Files.forEach(function(file) { %>
+      <li
+        class="bg-white p-4 rounded shadow hover:bg-gray-50 transition duration-200 flex justify-between items-center"
+      >
+        <a
+          href="<%= file.path %>"
+          target="_blank"
+          class="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600 transition duration-200"
+        >
+          View <%= file.name %>
+        </a>
+        <a
+          href="<%= file.path.replace('/upload/', '/upload/fl_attachment/') %>"
+          download
+          class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition duration-200"
+        >
+          Download
+        </a>
+      </li>
+      <% }); %> <% } else { %>
+      <h2 class="text-red-600 mt-4">No files in this folder</h2>
+      <% } %>
+    </ul>
   </body>
 </html>
