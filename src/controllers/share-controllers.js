@@ -92,4 +92,34 @@ const renderSharedFolder = async (req, res) => {
   res.render('shared-folder', { folder });
 };
 
+// Generate and share file link with expiration
+const shareFileGet = async (req, res) => {
+  const id = parseInt(req.params.id, 10);
+
+  if (isNaN(id)) {
+    return res.status(400).send('Invalid file ID');
+  }
+
+  const token = generateToken();
+  const expirationTime = Date.now() + 2 * 60000;
+  const expirationDate = new Date(expirationTime);
+  // const url = `https://file-uploader.koyeb.app/share-folder/${id}/?token=${token}`;
+  const url = `http://localhost:8080/share-folder/${id}/?token=${token}`;
+
+  try {
+    await prisma.sharedFolder.create({
+      data: {
+        folderId: id,
+        shareLink: url,
+        expiry: expirationDate,
+      },
+    });
+
+    res.render('share-link', { link: url });
+  } catch (error) {
+    console.error('Error displaying share folder link', error);
+    res.status(500).send('Internal Server Error');
+  }
+};
+
 module.exports = { shareFolderGet, validateSharedLink, renderSharedFolder };
