@@ -36,7 +36,7 @@ const shareFolderGet = async (req, res) => {
   }
 };
 
-const validateSharedLink = async (req, res, next) => {
+const validateSharedFolderLink = async (req, res, next) => {
   const token = req.query.token;
   const folderId = parseInt(req.params.id, 10);
 
@@ -122,4 +122,8 @@ const shareFileGet = async (req, res) => {
   }
 };
 
-module.exports = { shareFolderGet, validateSharedLink, renderSharedFolder };
+module.exports = {
+  shareFolderGet,
+  validateSharedFolderLink,
+  renderSharedFolder,
+};
