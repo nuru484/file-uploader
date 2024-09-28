@@ -14,7 +14,7 @@ const signUpRouter = require('./src/routes/sign-up-routes');
 const dashboardRouter = require('./src/routes/dashboard-routes');
 const folderRouter = require('./src/routes/folder-routes');
 const fileRouter = require('./src/routes/file-routes');
-const shareRouter = require('./src/routes/share-routes');
+const shareRouter = require('./src/routes/folder-share-routes');
 
 const app = express();
 
