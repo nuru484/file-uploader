@@ -7,7 +7,7 @@ function generateToken() {
   return crypto.randomBytes(16).toString('hex');
 }
 
-// Generate and share folder link with expiration
+// Generate share folder link with expiration
 const shareFolderGet = async (req, res) => {
   const id = parseInt(req.params.id, 10);
 
@@ -92,7 +92,7 @@ const renderSharedFolder = async (req, res) => {
   res.render('shared-folder', { folder });
 };
 
-// Generate and share file link with expiration
+// Generate share file link with expiration
 const shareFileGet = async (req, res) => {
   const id = parseInt(req.params.id, 10);
 
@@ -104,12 +104,12 @@ const shareFileGet = async (req, res) => {
   const expirationTime = Date.now() + 2 * 60000;
   const expirationDate = new Date(expirationTime);
   // const url = `https://file-uploader.koyeb.app/share-folder/${id}/?token=${token}`;
-  const url = `http://localhost:8080/share-folder/${id}/?token=${token}`;
+  const url = `http://localhost:8080/share-file/${id}/?token=${token}`;
 
   try {
-    await prisma.sharedFolder.create({
+    await prisma.sharedFile.create({
       data: {
-        folderId: id,
+        fileId: id,
         shareLink: url,
         expiry: expirationDate,
       },
@@ -126,4 +126,5 @@ module.exports = {
   shareFolderGet,
   validateSharedFolderLink,
   renderSharedFolder,
+  shareFileGet,
 };

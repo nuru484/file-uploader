@@ -9,4 +9,11 @@ shareRouter.get(
   controllers.renderSharedFolder
 );
 
+shareRouter.get('/file/generate/:id', controllers.shareFileGet);
+// shareRouter.get(
+//   '/file-share/:id',
+//   controllers.validateSharedFolderLink,
+//   controllers.renderSharedFolder
+// );
+
 module.exports = shareRouter;
