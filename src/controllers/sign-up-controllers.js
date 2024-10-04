@@ -68,7 +68,7 @@ const validateUser = [
 
 const signUpPost = [
   // validation middleware
-  validateUser,
+  ...validateUser,
 
   // async function to handle the sign-up logic
   async (req, res, next) => {
