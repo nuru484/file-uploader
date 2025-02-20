@@ -15,6 +15,7 @@ const shareFolderGet = async (req, res) => {
     return res.status(400).send('Invalid folder ID');
   }
 
+  // Generate a token and expiration time
   const token = generateToken();
   const expirationTime = Date.now() + 2 * 60000;
   const expirationDate = new Date(expirationTime);
