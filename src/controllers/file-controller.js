@@ -69,6 +69,8 @@ const createFilePost = async (req, res) => {
   });
 };
 
+// GET route to display all files
+
 const displayFilesGet = async (req, res) => {
   try {
     const files = await prisma.file.findMany();
