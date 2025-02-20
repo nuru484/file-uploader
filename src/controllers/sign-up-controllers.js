@@ -12,8 +12,6 @@ const signUpGet = async (req, res) => {
   }
 };
 
-// updated sign-up post controller
-
 const validateUser = [
   // Username validation
   body('username')
