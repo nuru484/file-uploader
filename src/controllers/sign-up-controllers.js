@@ -12,6 +12,8 @@ const signUpGet = async (req, res) => {
   }
 };
 
+// update
+
 const validateUser = [
   // Username validation
   body('username')
