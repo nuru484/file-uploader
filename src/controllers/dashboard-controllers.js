@@ -6,6 +6,8 @@ const dashboardGet = async (req, res) => {
     return res.redirect('/login');
   }
 
+  // update
+
   try {
     const user = await prisma.user.findUnique({
       where: { id: req.session.userId },
