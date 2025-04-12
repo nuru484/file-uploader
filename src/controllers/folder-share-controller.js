@@ -37,8 +37,6 @@ const shareFolderGet = async (req, res) => {
   }
 };
 
-// update
-
 const validateSharedFolderLink = async (req, res, next) => {
   const token = req.query.token;
   const folderId = parseInt(req.params.id, 10);
